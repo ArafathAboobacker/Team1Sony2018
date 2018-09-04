@@ -1,12 +1,11 @@
 #first{
 	border: 4px solid blue;
-	
+	 
 }
 
 
 #second{
 	border: 4px solid blue;
-	position: relative;
-	padding-left: 40px;
+	position: fixed;
 	top: 100px;	
 }
