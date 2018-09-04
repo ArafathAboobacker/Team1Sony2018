@@ -1,6 +1,9 @@
 package com.sony.web;
-
+ 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Enumeration;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,7 +30,7 @@ public class AuthenticateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
 	/**
@@ -37,13 +40,28 @@ public class AuthenticateServlet extends HttpServlet {
 		
 		String userid = request.getParameter("userid");
 		String passwd = request.getParameter("passwd");
-		
+		PrintWriter out = response.getWriter();
+		out.println("<html>");
+		out.println("<body>");
 		if(userid.equalsIgnoreCase("Arafath") && passwd.equals("pass")){
-			response.getWriter().println("Welcome "+userid);
+			out.println("Welcome "+userid+"<br>");
+			
 		}else{
-			response.getWriter().println("Invalid UserID / Password ");
+			out.println("Invalid UserID / Password ");
 		}
 		
+		Enumeration<String> headerNames = request.getHeaderNames();
+		String headerName;
+		
+		while(headerNames.hasMoreElements()){
+			headerName = headerNames.nextElement();
+			out.println(headerName+" - "+request.getHeader(headerName)+"<br>");
+		}
+		
+		out.println(request.getRemoteAddr());
+		
+		out.println("</body>");
+		out.println("</html>");
 	}
 
 }
